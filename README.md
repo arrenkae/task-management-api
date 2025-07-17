@@ -1,18 +1,25 @@
 # Task Management API
+
 A simple backend API for a task management app.
 
 ## Setup
+
 1. Make sure you have [Docker](https://www.docker.com/get-started) installed
 2. Clone the repo and navigate to the folder
+
 ```
 git clone https://github.com/arrenkae/task-management-api.git
 cd task-management-api
 ```
+
 3. Buld the docker app
+
 ```
 docker build -t task-management-api .
 ```
+
 4. Run the docker app
+
 ```
 docker run -p [host_port]:[container_port] task-management-api
 
@@ -22,13 +29,13 @@ docker run -p [host_port]:[container_port] task-management-api
 
 ## API endpoints
 
-| route   | description   |  parameters |
-| ----- | ------ | ------ |
-| `POST` /tasks | adds a new task | `body`:text, status |
-| `PUT` /tasks/:id| updates status of a task | `id`, `body`:status |
-| `DELETE` /tasks/:id | deletes task | `id` |
-| `GET` /tasks | retrieves all tasks | |
-| `GET` /tasks?status="[status]"| retrieves tasks filtered by status | `query`:status |
+| route                        | description                        | parameters          |
+| ---------------------------- | ---------------------------------- | ------------------- |
+| `POST` /tasks                | adds a new task                    | `body`:text, status |
+| `PUT` /tasks/:id             | updates status of a task           | `id`, `body`:status |
+| `DELETE` /tasks/:id          | deletes task                       | `id`                |
+| `GET` /tasks                 | retrieves all tasks                |                     |
+| `GET` /tasks?status=[status] | retrieves tasks filtered by status | `query`:status      |
 
 ### POST /tasks
 
@@ -40,10 +47,14 @@ docker run -p [host_port]:[container_port] task-management-api
     "status": "in progress"
 }
 ```
+
 #### Response
 
 ```
-{ "id": 42 }
+{
+    "id": 42,
+    "msg":"Task added successfully":
+}
 ```
 
 ### PUT /tasks/:id
@@ -83,8 +94,7 @@ docker run -p [host_port]:[container_port] task-management-api
 ]
 ```
 
-### GET /tasks?status="completed"
-
+### GET /tasks?status=completed
 
 #### Response
 
@@ -98,14 +108,14 @@ docker run -p [host_port]:[container_port] task-management-api
 ]
 ```
 
-*** 
+---
 
 ### HTTP response status codes
 
-| code   | decription |
-| ----- | ------ |
-| `201`| Task added |
-| `200`| OK |
-| `204`| No existing task with this id |
-| `400`| Invalid parameters |
-| `500`| Database error |
+| code  | decription                    |
+| ----- | ----------------------------- |
+| `201` | Task added                    |
+| `200` | OK                            |
+| `204` | No existing task with this id |
+| `400` | Invalid parameters            |
+| `500` | Database error                |

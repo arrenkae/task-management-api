@@ -7,15 +7,15 @@ export const newTask = async (req, res) => {
   try {
     const { text, status } = req.body;
     if (!text || !status) {
-      return res.status(400).send("Text and status required");
+      return res.status(400).json({ msg: "Text and status required" });
     }
     if (!statusOptions.includes(status)) {
-      return res.status(400).send("Invalid status");
+      return res.status(400).json({ msg: "Invalid status" });
     }
     const id = _newTask(text, status).lastInsertRowid;
     return res.status(201).json({ id, msg: "Task added successfully" });
   } catch (error) {
-    return res.status(500).send("Unable to add task");
+    return res.status(500).json({ msg: "Unable to add task" });
   }
 };
 
@@ -24,19 +24,20 @@ export const updateTaskStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     if (!status) {
-      return res.status(400).send("Status required");
+      return res.status(400).json({ msg: "Status required" });
     }
     if (!statusOptions.includes(status)) {
-      return res.status(400).send("Invalid status");
+      return res.status(400).json({ msg: "Invalid status" });
     }
     const update = _updateTaskStatus(id, status);
+    // database returns changes = 0 if it didn't update or delete anything
     if (update.changes == 0) {
-      return res.status(204).send("No such task");
+      return res.status(204).json({ msg: "No such task" });
     } else {
-      return res.status(200).send("Task updated successfully");
+      return res.status(200).json({ msg: "Task updated successfully" });
     }
   } catch (error) {
-    return res.status(500).send("Unable to update task");
+    return res.status(500).json({ msg: "Unable to update task" });
   }
 };
 
@@ -45,17 +46,18 @@ export const deleteTask = async (req, res) => {
     const { id } = req.params;
     const del = _deleteTask(id);
     if (del.changes == 0) {
-      return res.status(204).send("No such task");
+      return res.status(204).json({ msg: "No such task" });
     } else {
-      return res.status(200).send("Task deleted successfully");
+      return res.status(200).json({ msg: "Task deleted successfully" });
     }
   } catch (error) {
-    return res.status(500).send("Unable to delete task");
+    return res.status(500).json({ msg: "Unable to delete task" });
   }
 };
 
 export const getTasks = async (req, res) => {
   try {
+    // filter query optional
     const status = req.query.status;
     if (status) {
       const tasks = _getTasksByStatus(status);
@@ -65,6 +67,6 @@ export const getTasks = async (req, res) => {
       return res.status(200).json(tasks);
     }
   } catch (error) {
-    return res.status(500).send("Unable to get tasks");
+    return res.status(500).json({ msg: "Unable to get tasks" });
   }
 };

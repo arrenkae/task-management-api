@@ -3,6 +3,9 @@ import { newTask, updateTaskStatus, deleteTask, getTasks } from "./controllers.j
 
 export const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("https://github.com/arrenkae/task-management-api");
+});
 router.post("/tasks", newTask);
 router.put("/tasks/:id", updateTaskStatus);
 router.delete("/tasks/:id", deleteTask);
