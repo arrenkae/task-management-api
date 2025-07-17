@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,6 @@
   "dependencies": {
     "better-sqlite3": "^12.2.0",
     "express": "^5.1.0",
-    "fs": "^0.0.1-security",
     "nodemon": "^3.1.10"
   }
 }
