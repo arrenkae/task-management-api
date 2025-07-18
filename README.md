@@ -15,7 +15,9 @@ cd task-management-api
 3. Buld the docker app
 
 ```
-docker build -t task-management-api .
+docker build -t task-management-api --build-arg PORT=[container_port] .
+
+# you can omit "--build-arg PORT=[container_port]" to use the default port
 ```
 
 4. Run the docker app
@@ -24,8 +26,9 @@ docker build -t task-management-api .
 docker run -p [host_port]:[container_port] task-management-api
 
 # host_port is the port on your local machine
-# container_port is the port on the Docker container
+# container_port is the port on the Docker container (default: 3000)
 ```
+5. Access the API at `http://localhost:[host_port]`
 
 ## API endpoints
 
