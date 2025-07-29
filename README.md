@@ -119,6 +119,5 @@ docker run -p [host_port]:[container_port] task-management-api
 | ----- | ----------------------------- |
 | `201` | Task added                    |
 | `200` | OK                            |
-| `204` | No existing task with this id |
-| `400` | Invalid parameters            |
-| `500` | Database error                |
+| `404` | No task found                 |
+| `400` | Bad request                   |
